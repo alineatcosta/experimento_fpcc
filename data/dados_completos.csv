@@ -1,0 +1,79 @@
+classe,nJEs,delph,std,nLIs, nLIscorretos
+atm,24,0,0,6489,13
+atm,24,1,0,6376,13
+atm,24,2,0,245,13
+atm,24,0,1,212,13
+atm,24,1,1,212,13
+atm,24,2,1,210,13
+Transaction ,13,0,0,4012,5
+Transaction ,13,1,0,1115,5
+Transaction ,13,2,0,27,4
+Transaction ,13,0,1,43,4
+Transaction ,13,1,1,47,4
+Transaction ,13,2,1,29,4
+Money ,10,0,0,69,6
+Money ,10,1,0,69,6
+Money ,10,2,0,27,5
+Money ,10,0,1,78,5
+Money ,10,1,1,79,6
+Money ,10,2,1,25,6
+Withdrawal ,4,0,0,1232,3
+Withdrawal ,4,1,0,987,3
+Withdrawal ,4,2,0,30,3
+Withdrawal ,4,0,1,30,3
+Withdrawal ,4,1,1,30,3
+Withdrawal ,4,2,1,30,3
+Transfer ,6,0,0,1134,3
+Transfer ,6,1,0,678,3
+Transfer ,6,2,0,24,3
+Transfer ,6,0,1,24,3
+Transfer ,6,1,1,24,3
+Transfer ,6,2,1,24,3
+Inquiry ,3,0,0,1043,2
+Inquiry ,3,1,0,567,2
+Inquiry ,3,2,0,8,1
+Inquiry ,3,0,1,8,1
+Inquiry ,3,1,1,9,1
+Inquiry ,3,2,1,98,1
+Deposit ,4,0,0,912,3
+Deposit,4,1,0,345,3
+Deposit,4,2,0,10,3
+Deposit,4,0,1,10,3
+Deposit,4,1,1,10,3
+Deposit,4,2,1,10,3
+Session,13,0,0,5165,8
+Session,13,1,0,1976,8
+Session,13,2,0,44,8
+Session,13,0,1,44,8
+Session,13,1,1,44,8
+Session,13,2,1,44,8
+OperatorPanel ,4,0,0,42,3
+OperatorPanel,4,1,0,39,2
+OperatorPanel,4,2,0,50,2
+OperatorPanel,4,0,1,50,2
+OperatorPanel,4,1,1,50,2
+OperatorPanel,4,2,1,50,2
+ReceiptPrinter,1,0,0,32,1
+ReceiptPrinter,1,1,0,32,1
+ReceiptPrinter,1,2,0,12,1
+ReceiptPrinter,1,0,1,12,1
+ReceiptPrinter,1,1,1,12,1
+ReceiptPrinter,1,2,1,12,1
+CardReader,3,0,0,27,3
+CardReader,3,1,0,25,3
+CardReader,3,2,0,27,2
+CardReader,3,0,1,27,2
+CardReader,3,1,1,27,2
+CardReader,3,2,1,27,2
+EnvelopeAcceptor,3,0,0,9,2
+EnvelopeAcceptor,3,1,0,9,2
+EnvelopeAcceptor,3,2,0,9,2
+EnvelopeAcceptor,3,0,1,9,2
+EnvelopeAcceptor,3,1,1,9,2
+EnvelopeAcceptor,3,2,1,9,2
+CashDispenser,6,0,0,20,4
+CashDispenser,6,1,0,20,4
+CashDispenser,6,2,0,9,3
+CashDispenser,6,0,1,9,3
+CashDispenser,6,1,1,9,3
+CashDispenser,6,2,1,9,3

@@ -1,0 +1,57 @@
+---
+title: "analise"
+author: "Aline Costa"
+date: "7 de julho de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+```
+
+execucao = read_csv(here::here("data/execucao_daikon.csv"))
+invariantes = read_csv(here::here("data/invariantes_corretos.csv"))
+glimpse(invariantes)
+glimpse(execucao)
+
+dados_completos = read_csv(here::here("data/dados_completos.csv"))
+glimpse(dados_completos)
+```
+
+# Para calcular a quantidade de elementos nos conjuntos B, C e D utilizamos as definições:
+# B é o conjunto de invariantes especificado inicialmente no sistema ATM. Correspondente a coluna nJEs
+# C é o conjunto de prováveis invariantes relatados pela Daikon.  Correspondente a coluna nLIs
+# D é a interseção entre C e B.  Correspondente a coluna nLIscorretos
+
+Precisamos para cada configuração (--nesting-depth, com os valores 0, 1 e 2 e --std-visibility, verdadeiro e falso), calcular B, C e D.
+
+```{r}
+dados_completos_por_configuracao <- dados_completos %>% 
+  group_by(delph, std) %>% 
+  summarise(b = sum(nJEs), c = sum(nLIs), d = sum(nLIscorretos))
+```
+
+Agora o mapeamento entre TP, FP, FN e TN e B, C e D pode ser feito, através das fórmulas:
+TP = D = nLIscorretos
+FP = C/B = nLIs/nJEs
+FN = B/C = nJEs/nLIs
+```{r}
+dados_completos_por_configuracao <- dados_completos_por_configuracao %>% 
+  mutate(tp = d, fp = (c/b), fn = (b/c))
+```
+
+Agora podemos calcular precisão e recall de acordo com nossas fórmulas
+Precisão = | TP | / (| TP | + | FP |); 
+Recall = | TP | / (| TP | + | FN |). 
+
+```{r}
+dados_completos_por_configuracao <- dados_completos_por_configuracao %>% 
+  mutate(precisao = ((tp) / (tp + fp)), recall = ((tp) / (tp + fn)))
+```
+
+
+
+
+
