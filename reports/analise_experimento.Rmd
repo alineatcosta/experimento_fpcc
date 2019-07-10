@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+```{r}
 execucao = read_csv(here::here("data/execucao_daikon.csv"))
 invariantes = read_csv(here::here("data/invariantes_corretos.csv"))
 glimpse(invariantes)
@@ -19,10 +20,10 @@ dados_completos = read_csv(here::here("data/dados_completos.csv"))
 glimpse(dados_completos)
 ```
 
-# Para calcular a quantidade de elementos nos conjuntos B, C e D utilizamos as definições:
-# B é o conjunto de invariantes especificado inicialmente no sistema ATM. Correspondente a coluna nJEs
-# C é o conjunto de prováveis invariantes relatados pela Daikon.  Correspondente a coluna nLIs
-# D é a interseção entre C e B.  Correspondente a coluna nLIscorretos
+Para calcular a quantidade de elementos nos conjuntos B, C e D utilizamos as definições:
+B é o conjunto de invariantes especificado inicialmente no sistema ATM. Correspondente a coluna nJEs
+C é o conjunto de prováveis invariantes relatados pela Daikon.  Correspondente a coluna nLIs
+D é a interseção entre C e B.  Correspondente a coluna nLIscorretos
 
 Precisamos para cada configuração (--nesting-depth, com os valores 0, 1 e 2 e --std-visibility, verdadeiro e falso), calcular B, C e D.
 
