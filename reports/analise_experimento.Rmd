@@ -1,14 +1,13 @@
 ---
-title: "analise"
+title: "Análise precisão e recall"
 author: "Aline Costa"
-date: "7 de julho de 2019"
+date: "1 de julho de 2019"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
-
 ```
 
 execucao = read_csv(here::here("data/execucao_daikon.csv"))
@@ -33,25 +32,34 @@ dados_completos_por_configuracao <- dados_completos %>%
   summarise(b = sum(nJEs), c = sum(nLIs), d = sum(nLIscorretos))
 ```
 
-Agora o mapeamento entre TP, FP, FN e TN e B, C e D pode ser feito, através das fórmulas:
-TP = D = nLIscorretos
-FP = C/B = nLIs/nJEs
-FN = B/C = nJEs/nLIs
-```{r}
-dados_completos_por_configuracao <- dados_completos_por_configuracao %>% 
-  mutate(tp = d, fp = (c/b), fn = (b/c))
-```
-
 Agora podemos calcular precisão e recall de acordo com nossas fórmulas
-Precisão = | TP | / (| TP | + | FP |); 
-Recall = | TP | / (| TP | + | FN |). 
+Precisão = número de identificações corretas / número total de expressões relatadas; 
+Recall = número de identificações corretas / número total de contratos especificados pelos projetistas; 
 
 ```{r}
 dados_completos_por_configuracao <- dados_completos_por_configuracao %>% 
-  mutate(precisao = ((tp) / (tp + fp)), recall = ((tp) / (tp + fn)))
+  mutate(precisao = (d / c), recall = (d / b))
 ```
 
+Plotando os valores em uma visualização para destacar os padrões mencionados na análise.
 
+# passando variáveis como factor para aplicar o shape
+```{r}
+dados_completos_por_configuracao$delph <- factor(dados_completos_por_configuracao$delph)
+dados_completos_por_configuracao$std <- factor(dados_completos_por_configuracao$std)
+```
 
+```{r}
+ggplot(aes(x = recall*100, y = precisao*100, shape = delph), 
+       data = dados_completos_por_configuracao) +
+  geom_point(mapping = aes(color = std), size = 4.5) +
+  labs(x = "PRECISÃO vs RECALL ",
+       y = " ",
+       colour = "STD",
+       shape = "DELPH") +
+  scale_x_continuous(limits = c(53, 60), breaks = seq(53, 60, 1)) +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(0, 10, 1)) +
+  theme_classic()
+```
 
-
+A visualização evidencia algumas observações interessantes do nosso estudo de caso. Como mencionado na análise, quando o parâmetro std-visibility (STD) é 0 (false), a ferramenta Daikon apresenta um recall mais alto, ou seja, ele consegue inferir mais invariantes corretas do que com std-visibility igual a 1. A exceção foi quando o parâmetro --nesting-depth (DELPH) foi setado para 2. Neste caso, a Daikon provavelmente se perdeu na maior profundidade da classes e atributos que deveria analisar e acabau perdendo alguns invariantes corretos. Esta observação, evidenciada pela análise, corrobora os resultados do artigo original.
